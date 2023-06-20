@@ -37,7 +37,7 @@
 
                     <div class="capitalize flex font-semibold hidden lg:block my-2 space-x-3 text-center text-sm">
                         
-                        <a href="signin.html" class="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">Login</a>
+                        <a href="{% url 'core:signin' %}" class="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">Login</a>
                     </div>
 
                 </div>
@@ -50,11 +50,13 @@
             <div class="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-">
                 <h1 class="lg:text-3xl text-xl font-semibold mb-6"> Sign up</h1>
                 <!--<p class="mb-2 text-black text-lg"> Register to manage your account </p>-->
-                <form action="index.html">
-                    <!--<div class="flex lg:flex-row flex-col lg:space-x-2">
-                        <input type="text" placeholder="First Name"  class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                        <input type="text" placeholder="Last Name" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                    </div>-->                    
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% for message in messages %}
+                    <h3 style="color: #ff5353; font-weight: 700;">
+                        {{message}}
+                    </h3> 
+                    {% endfor %}                 
                     <input name="email" type="email" placeholder="Email" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
                     <input name="username" type="text" placeholder="Username" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
                     <input name="pass1" type="password" placeholder="Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
@@ -68,7 +70,7 @@
                     </div>
                     <button type="submit" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Sign up</button>
                     <div class="text-center mt-5 space-x-2">
-                        <p class="text-base"> Do you have an account? <a href="form-login.html"> Login </a></p>
+                        <p class="text-base"> Do you have an account? <a href="{% url 'core:signin' %}"> Login </a></p>
                     </div>
                 </form>
             </div>
@@ -127,8 +129,7 @@
         })(window, document);
     </script>-->
 
-    <!-- Scripts
-    ================================================== -->
+    <!-- Scripts -->
     <script src="{% static 'assets/js/tippy.all.min.js' %}"></script>
     <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'assets/js/uikit.js' %}"></script>
